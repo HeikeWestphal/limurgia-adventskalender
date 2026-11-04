@@ -387,12 +387,11 @@ dialog::backdrop {
    GESCHICHTEN UND BILDER
 ============================== */
 
+const pngUppercase = [6, 8];
+
 const stories = Array.from({ length: 24 }, (_, i) => {
   const day = i + 1;
   const number = String(day).padStart(2, "0");
-
-  const pngUppercase = [/* Nummern der Dateien mit .PNG */];
-
   const extension = pngUppercase.includes(day) ? "PNG" : "png";
 
   return {
