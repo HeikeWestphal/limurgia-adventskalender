@@ -268,6 +268,10 @@ main {
   color: #212121;
 }
 
+.story-text.story-custom {
+  white-space: normal;
+}
+
 .hint {
   margin-top: 22px;
   font-size: 12px;
@@ -405,6 +409,10 @@ main {
 
     const calendar = document.getElementById("calendar");
     const dialog = document.getElementById("storyDialog");
+    const storyText = document.getElementById("storyText");
+    const storyImage = document.getElementById("storyImage");
+    const storyQuote = document.getElementById("storyQuote");
+    const storyQuoteAuthor = document.getElementById("storyQuoteAuthor");
 
     function imagePathForDay(day) {
       const number = String(day).padStart(2, "0");
@@ -426,6 +434,25 @@ main {
         image: imagePathForDay(day),
         text: `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.`
       };
+    }
+
+    async function loadCustomStory(story) {
+      if (!story.storyFile) {
+        storyText.classList.remove("story-custom");
+        storyText.textContent = story.text || "";
+        return;
+      }
+
+      try {
+        const response = await fetch(story.storyFile);
+        if (!response.ok) throw new Error("Story file not found");
+        const html = await response.text();
+        storyText.classList.add("story-custom");
+        storyText.innerHTML = html;
+      } catch (error) {
+        storyText.classList.remove("story-custom");
+        storyText.textContent = story.text || "";
+      }
     }
 
     function renderCalendar() {
@@ -465,7 +492,7 @@ main {
       }
     }
 
-    function openStory(day) {
+    async function openStory(day) {
       const story = safeStory(day);
 
       if (!opened.includes(day)) {
@@ -476,25 +503,38 @@ main {
       }
 
       document.getElementById("storyTitle").textContent = story.title || `Geschichte ${day}`;
-      const image = document.getElementById("storyImage");
-      image.src = story.image;
-      image.alt = story.title || `Geschichte ${day}`;
+      const hasCustomStory = Boolean(story.storyFile);
 
-      const quote = document.getElementById("storyQuote");
-      const quoteAuthor = document.getElementById("storyQuoteAuthor");
-      if (story.quote) {
-        quote.textContent = story.quote;
-        quote.hidden = false;
-        quoteAuthor.textContent = story.quoteAuthor || "";
-        quoteAuthor.hidden = false;
+      if (hasCustomStory) {
+        storyImage.hidden = true;
+        storyImage.removeAttribute("src");
+        storyImage.alt = "";
+        storyQuote.hidden = true;
+        storyQuote.textContent = "";
+        storyQuoteAuthor.hidden = true;
+        storyQuoteAuthor.textContent = "";
+        await loadCustomStory(story);
       } else {
-        quote.textContent = "";
-        quote.hidden = true;
-        quoteAuthor.textContent = "";
-        quoteAuthor.hidden = true;
+        storyText.classList.remove("story-custom");
+        storyImage.hidden = false;
+        storyImage.src = story.image;
+        storyImage.alt = story.title || `Geschichte ${day}`;
+
+        if (story.quote) {
+          storyQuote.textContent = story.quote;
+          storyQuote.hidden = false;
+          storyQuoteAuthor.textContent = story.quoteAuthor || "";
+          storyQuoteAuthor.hidden = false;
+        } else {
+          storyQuote.textContent = "";
+          storyQuote.hidden = true;
+          storyQuoteAuthor.textContent = "";
+          storyQuoteAuthor.hidden = true;
+        }
+
+        storyText.textContent = story.text || "";
       }
 
-      document.getElementById("storyText").textContent = story.text || "";
       renderCalendar();
       dialog.showModal();
     }
