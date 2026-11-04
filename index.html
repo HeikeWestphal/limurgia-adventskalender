@@ -380,17 +380,22 @@ dialog::backdrop {
    GESCHICHTEN UND BILDER
 ============================== */
 
-// Hier später eigene Bilder und Texte eintragen.
+const stories = Array.from({ length: 24 }, (_, i) => {
+  const day = i + 1;
+  const number = String(day).padStart(2, "0");
 
-const stories = Array.from({ length: 24 }, (_, i) => ({
-  title: `Geschichte ${i + 1}`,
+  const pngUppercase = [/* Nummern der Dateien mit .PNG */];
 
-  image: `images/tuerchen-${String(i + 1).padStart(2, "0")}.png`,
+  const extension = pngUppercase.includes(day) ? "PNG" : "png";
 
-  text: `Hier kommt deine Geschichte zum ${i + 1}. Dezember.
+  return {
+    title: `Geschichte ${day}`,
+    image: `images/tuerchen-${number}.${extension}`,
+    text: `Hier kommt deine Geschichte zum ${day}. Dezember.
 
 Dieser Text ist zunächst ein Platzhalter.`
-}));
+  };
+});
 
 /* ==============================
    DATUMSFREIGABE
