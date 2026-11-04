@@ -38,17 +38,15 @@ main { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
 #storyDialog .dialog-inner h2 { margin: 0 0 22px; font: normal 34px Georgia, serif; }
 .story-layout { display: grid; grid-template-columns: minmax(220px, 1.1fr) minmax(0, 1.5fr); gap: 28px; align-items: start; }
 #storyImage { display: block; width: 100%; height: auto; max-height: 520px; object-fit: cover; margin: 0; }
-.story-copy { display: flex; flex-direction: column; }
-.story-quote { margin: 0 0 16px; padding-left: 14px; border-left: 3px solid var(--accent); background: transparent; color: #2d2d2d; font: italic 15px/1.8 Georgia, "Times New Roman", serif; white-space: pre-line; }
-.story-quote-author { margin: 0 0 18px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #666; }
-.story { white-space: pre-line; margin: 0; font-size: 15px; line-height: 1.8; }
+.story-copy { display: contents; }
+.story-quote { grid-column: 2; grid-row: 1; align-self: start; margin: 0 0 16px; padding-left: 14px; border-left: 3px solid var(--accent); background: transparent; color: #2d2d2d; font: italic 15px/1.8 Georgia, "Times New Roman", serif; white-space: pre-line; }
+.story-quote-author { grid-column: 2; grid-row: 2; align-self: start; margin: -10px 0 18px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #666; }
+.story { grid-column: 1 / -1; grid-row: 3; white-space: pre-line; margin: 0; font-size: 15px; line-height: 1.8; width: 100%; max-width: none; }
 .close { float: right; border: 0; background: none; color: #222; font-size: 30px; cursor: pointer; }
 .hint { margin-top: 22px; font-size: 12px; color: #666; }
 .credit { margin-top: 45px; padding-top: 18px; border-top: 1px solid #ddd; font: italic 16px Georgia, serif; }
 @media (max-width: 800px) { .calendar { grid-template-columns: repeat(4, minmax(0, 1fr)); } .header-logo { width: clamp(200px, 48vw, 360px); } }
-@media (max-width: 680px) {
-  .story-layout { grid-template-columns: 1fr; }
-}
+@media (max-width: 680px) { .story-layout { display: flex; flex-direction: column; } #storyImage { width: 100%; } .story-quote, .story-quote-author, .story { width: 100%; } }
 @media (max-width: 480px) {
   .top { padding: 10px 14px; } .top-inner { gap: 12px; } .header-logo { width: 65%; max-width: 260px; }
   .back { font-size: 11px; text-align: right; } main { padding: 0 14px 40px; }
@@ -81,11 +79,9 @@ main { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
     <h2 id="storyTitle"></h2>
     <div class="story-layout">
       <img id="storyImage" alt="">
-      <div class="story-copy">
-        <blockquote id="storyQuote" class="story-quote" hidden></blockquote>
-        <div id="storyQuoteAuthor" class="story-quote-author" hidden></div>
-        <p id="storyText" class="story"></p>
-      </div>
+      <blockquote id="storyQuote" class="story-quote" hidden></blockquote>
+      <div id="storyQuoteAuthor" class="story-quote-author" hidden></div>
+      <p id="storyText" class="story"></p>
     </div>
   </div>
 </dialog>
