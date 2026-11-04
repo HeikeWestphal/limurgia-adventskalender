@@ -219,34 +219,133 @@ dialog::backdrop {
     font-size: 16px;
   }
 }  
+
+/* Kompakter, responsiver Kopfbereich */
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px max(24px, calc((100vw - 1100px) / 2));
+  border-top: 3px solid #111;
+}
+
+.header-logo {
+  display: block;
+  width: clamp(220px, 36vw, 440px);
+  max-width: 75%;
+  height: auto;
+  object-fit: contain;
+}
+
+.back {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: #444;
+  text-decoration: underline;
+}
+
+/* Kalender näher an den Kopfbereich */
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.calendar-intro {
+  text-align: center;
+  margin: 16px auto 26px;
+}
+
+.calendar-poem {
+  max-width: 780px;
+  margin: 0 auto;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Flexible Türchen */
+
+.calendar {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* Tablets */
+
+@media (max-width: 800px) {
+  .header-logo {
+    width: clamp(200px, 48vw, 360px);
+  }
+
+  .calendar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Smartphones */
+
+@media (max-width: 480px) {
+  .top {
+    padding: 10px 14px;
+    gap: 12px;
+  }
+
+  .header-logo {
+    width: 65%;
+    max-width: 260px;
+  }
+
+  .back {
+    font-size: 11px;
+    text-align: right;
+  }
+
+  main {
+    padding: 0 14px 40px;
+  }
+
+  .calendar-intro {
+    margin: 14px auto 22px;
+  }
+
+  .calendar-poem {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .calendar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+
 </style>
 </head>
 
 <body>
-
 <header class="top">
-  <a class="brand" href="https://limurgia.wordpress.com/">
-    Limurgia
-  </a>
+  <img
+    src="./weihnachtskalender.png"
+    alt="Weihnachtskalender"
+    class="header-logo">
+
   <a class="back" href="https://limurgia.wordpress.com/">
     Zurück zum Blog
   </a>
 </header>
 
 <main>
-<div class="calendar-intro">
-  <h1>
-    <img
-      src="./weihnachtskalender.png"
-      alt="Weihnachtskalender"
-      class="calendar-logo">
-  </h1>
-
+  <div class="calendar-intro">
   <p class="calendar-poem">
-    Wenn die Nächte länger werden und der Wein
-    die Lippen wärmt, erwachen Geschichten zum Leben.
-    Manche davon schreibt das Leben, andere der Wein,
-    doch die schönsten erzählt die Nacht.
+    Wenn die Nächte länger werden und der Wein die Lippen wärmt,
+    erwachen Geschichten zum Leben. Manche davon schreibt das Leben,
+    andere der Wein, doch die schönsten erzählt die Nacht.
   </p>
 </div>
 
