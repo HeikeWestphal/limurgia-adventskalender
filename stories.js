@@ -2,7 +2,7 @@ window.limurgiaStories = [
   { day: 1, title: "Geschichte 1", text: "Hier kommt deine Geschichte zum 1. Dezember.\n\nDieser Text ist zunächst ein Platzhalter." },
   { day: 2, title: "Die bessere Hamlet", preview: "Eines meiner Lieblingszitate, das mir fast täglich durch den Kopf schwirrt.", storyFile: "story-02.html", image: "images/tuerchen-02.png" },
   { day: 3, title: "Geschichte 3", text: "Hier kommt deine Geschichte zum 3. Dezember.\n\nDieser Text ist zunächst ein Platzhalter." },
-  { day: 4, title: "Sag niemals nie", preview: "Es gibt Menschen, die haben einen Plan. Für ihr ganzes Leben.", storyFile: "story-04.html", image: "images/tuerchen-04.png" },
+  { day: 4, title: "NIE ist ein verdammt gefährliches Wort", preview: "Es gibt Menschen, die haben einen Plan. Für ihr ganzes Leben.", storyFile: "story-04.html", image: "images/tuerchen-04.png" },
   { day: 5, title: "Geschichte 5", text: "Hier kommt deine Geschichte zum 5. Dezember.\n\nDieser Text ist zunächst ein Platzhalter." },
   { day: 6, title: "Geschichte 6", text: "Hier kommt deine Geschichte zum 6. Dezember.\n\nDieser Text ist zunächst ein Platzhalter." },
   { day: 7, title: "Geschichte 7", text: "Hier kommt deine Geschichte zum 7. Dezember.\n\nDieser Text ist zunächst ein Platzhalter." },
