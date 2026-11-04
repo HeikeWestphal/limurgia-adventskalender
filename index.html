@@ -367,11 +367,24 @@ main {
     const calendar = document.getElementById("calendar");
     const dialog = document.getElementById("storyDialog");
 
+    function imagePathForDay(day) {
+      const number = String(day).padStart(2, "0");
+      const extension = [6, 8].includes(Number(day)) ? "PNG" : "png";
+      return `images/tuerchen-${number}.${extension}`;
+    }
+
     function safeStory(day) {
-      return stories.find(story => Number(story.day) === Number(day)) || {
+      const existingStory = stories.find(story => Number(story.day) === Number(day));
+      if (existingStory) {
+        return {
+          ...existingStory,
+          image: existingStory.image || imagePathForDay(day)
+        };
+      }
+      return {
         day,
         title: `Geschichte ${day}`,
-        image: `images/tuerchen-${String(day).padStart(2, '0')}.png`,
+        image: imagePathForDay(day),
         text: `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.`
       };
     }
@@ -388,7 +401,7 @@ main {
 
         if (opened.includes(day)) {
           const img = document.createElement("img");
-          img.src = story.image || "";
+          img.src = story.image;
           img.alt = story.title || `Türchen ${day}`;
           button.appendChild(img);
 
@@ -425,7 +438,7 @@ main {
 
       document.getElementById("storyTitle").textContent = story.title || `Geschichte ${day}`;
       const image = document.getElementById("storyImage");
-      image.src = story.image || "";
+      image.src = story.image;
       image.alt = story.title || `Geschichte ${day}`;
 
       const quote = document.getElementById("storyQuote");
