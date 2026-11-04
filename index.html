@@ -134,7 +134,7 @@ main {
 
 .door.open {
   border: 1px solid var(--border);
-  background: #f5f3f1;
+  background: #f5f5f5;
 }
 
 .door.open img {
@@ -144,8 +144,17 @@ main {
   object-fit: cover;
 }
 
+.door.open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.4);
+  pointer-events: none;
+}
+
 .door.open .door-corner {
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
   background: rgba(255,255,255,0.9);
@@ -350,6 +359,12 @@ main {
   </dialog>
 
   <script src="./stories.js"></script>
+  <script>
+    if (Array.isArray(window.limurgiaStories)) {
+      const hamletStory = window.limurgiaStories.find(story => Number(story.day) === 2);
+      if (hamletStory) hamletStory.title = "Die bessere Hamlet";
+    }
+  </script>
   <script>
     const stories = Array.isArray(window.limurgiaStories) ? window.limurgiaStories : [];
 
