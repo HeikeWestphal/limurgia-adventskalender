@@ -132,7 +132,6 @@ main {
   cursor: not-allowed;
 }
 
-/* Geöffnete Türchen zeigen das Bild ohne farbigen Rahmen. */
 .door.open {
   border: 0;
 }
@@ -279,19 +278,32 @@ main {
   </div>
 </dialog>
 
+<script src="./stories.js"></script>
 <script>
-const pngUppercase = [6, 8];
-
-const stories = Array.from({ length: 24 }, (_, i) => {
-  const day = i + 1;
-  const number = String(day).padStart(2, "0");
-  const extension = pngUppercase.includes(day) ? "PNG" : "png";
-  return {
-    title: `Geschichte ${day}`,
-    image: `images/tuerchen-${number}.${extension}`,
-    text: `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.`
-  };
-});
+const stories = Array.isArray(window.limurgiaStories) && window.limurgiaStories.length
+  ? window.limurgiaStories.map((story) => {
+      const day = Number(story.day);
+      const number = String(day).padStart(2, '0');
+      const extension = [6, 8].includes(day) ? 'PNG' : 'png';
+      return {
+        ...story,
+        day,
+        title: story.title || `Geschichte ${day}`,
+        image: story.image || `images/tuerchen-${number}.${extension}`,
+        text: story.text || `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.`
+      };
+    })
+  : Array.from({ length: 24 }, (_, i) => {
+      const day = i + 1;
+      const number = String(day).padStart(2, '0');
+      const extension = [6, 8].includes(day) ? 'PNG' : 'png';
+      return {
+        day,
+        title: `Geschichte ${day}`,
+        image: `images/tuerchen-${number}.${extension}`,
+        text: `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.`
+      };
+    });
 
 // TESTMODUS: Alle Türchen sind freigeschaltet.
 const available = (day) => true;
