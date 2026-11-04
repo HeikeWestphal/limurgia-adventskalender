@@ -14,9 +14,7 @@
   --background: #ffffff;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -26,10 +24,6 @@ body {
   font-size: 15px;
   line-height: 1.6;
 }
-
-/* ==============================
-   KOPFBEREICH
-============================== */
 
 .top {
   border-top: 3px solid #111;
@@ -59,19 +53,12 @@ body {
   text-decoration: underline;
 }
 
-/* ==============================
-   HAUPTBEREICH
-============================== */
-
 main {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 24px 60px;
 }
-
-/* Einleitung und Kalender haben
-   immer dieselbe Containerbreite */
 
 .calendar-intro {
   width: 100%;
@@ -85,20 +72,14 @@ main {
   max-width: none;
   margin: 0;
   padding: 0;
-
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(14px, 1.5vw, 17px);
   font-style: italic;
   line-height: 1.65;
-
   text-align: justify;
   text-align-last: center;
   color: #333;
 }
-
-/* ==============================
-   KALENDER
-============================== */
 
 .calendar {
   display: grid;
@@ -151,8 +132,9 @@ main {
   cursor: not-allowed;
 }
 
+/* Geöffnete Türchen behalten den schmalen Rahmen der ungeöffneten. */
 .door.open {
-  border: 6px solid var(--wine);
+  border: 1px solid var(--border);
 }
 
 .door.open img {
@@ -165,7 +147,7 @@ main {
 .door.open::after {
   content: "";
   position: absolute;
-  inset: 6px;
+  inset: 1px;
   background: rgba(255, 255, 255, .4);
   pointer-events: none;
 }
@@ -180,10 +162,6 @@ main {
   font: 18px Georgia, serif;
 }
 
-/* ==============================
-   GESCHICHTEN-POPUP
-============================== */
-
 #storyDialog {
   width: min(700px, 92vw);
   max-width: 92vw;
@@ -196,13 +174,9 @@ main {
   box-shadow: 0 15px 60px #0003;
 }
 
-#storyDialog::backdrop {
-  background: rgba(0,0,0,.65);
-}
+#storyDialog::backdrop { background: rgba(0,0,0,.65); }
 
-#storyDialog .dialog-inner {
-  padding: 30px;
-}
+#storyDialog .dialog-inner { padding: 30px; }
 
 #storyDialog #storyImage {
   display: block;
@@ -228,13 +202,7 @@ main {
   cursor: pointer;
 }
 
-.story {
-  white-space: pre-line;
-}
-
-/* ==============================
-   FUSSZEILE
-============================== */
+.story { white-space: pre-line; }
 
 .hint {
   margin-top: 22px;
@@ -249,108 +217,41 @@ main {
   font: italic 16px Georgia, serif;
 }
 
-/* ==============================
-   TABLET
-============================== */
-
 @media (max-width: 800px) {
-  .calendar {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .header-logo {
-    width: clamp(200px, 48vw, 360px);
-  }
+  .calendar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .header-logo { width: clamp(200px, 48vw, 360px); }
 }
 
-/* ==============================
-   SMARTPHONE
-============================== */
-
 @media (max-width: 480px) {
-  .top {
-    padding: 10px 14px;
-  }
-
-  .top-inner {
-    gap: 12px;
-  }
-
-  .header-logo {
-    width: 65%;
-    max-width: 260px;
-  }
-
-  .back {
-    font-size: 11px;
-    text-align: right;
-  }
-
-  main {
-    padding: 0 14px 40px;
-  }
-
-  .calendar-intro {
-    margin: 14px 0 22px;
-  }
-
-  .calendar-poem {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-
-  .calendar {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .door .number {
-    font-size: 29px;
-  }
-
-  #storyDialog .dialog-inner {
-    padding: 18px;
-  }
-
-  #storyDialog #storyImage {
-    height: min(55vh, 500px);
-  }
-
-  #storyDialog .dialog-inner h2 {
-    font-size: 27px;
-  }
+  .top { padding: 10px 14px; }
+  .top-inner { gap: 12px; }
+  .header-logo { width: 65%; max-width: 260px; }
+  .back { font-size: 11px; text-align: right; }
+  main { padding: 0 14px 40px; }
+  .calendar-intro { margin: 14px 0 22px; }
+  .calendar-poem { font-size: 14px; line-height: 1.5; }
+  .calendar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .door .number { font-size: 29px; }
+  #storyDialog .dialog-inner { padding: 18px; }
+  #storyDialog #storyImage { height: min(55vh, 500px); }
+  #storyDialog .dialog-inner h2 { font-size: 27px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .door {
-    transition: none;
-  }
+  .door { transition: none; }
 }
 </style>
 </head>
 
 <body>
-
-<!-- KOPFBEREICH -->
-
 <header class="top">
   <div class="top-inner">
-    <img
-      src="./weihnachtskalender.png"
-      alt="Weihnachtskalender"
-      class="header-logo">
-
-    <a class="back"
-       href="https://limurgia.wordpress.com/">
-      Zurück zum Blog
-    </a>
+    <img src="./weihnachtskalender.png" alt="Weihnachtskalender" class="header-logo">
+    <a class="back" href="https://limurgia.wordpress.com/">Zurück zum Blog</a>
   </div>
 </header>
 
-<!-- HAUPTBEREICH -->
-
 <main>
-
   <div class="calendar-intro">
     <p class="calendar-poem">
       Wenn die Nächte länger werden und der Wein die Lippen wärmt,
@@ -359,99 +260,56 @@ main {
     </p>
   </div>
 
-  <section
-    id="calendar"
-    class="calendar"
-    aria-label="Weihnachtskalender mit 24 Türchen">
-  </section>
+  <section id="calendar" class="calendar" aria-label="Weihnachtskalender mit 24 Türchen"></section>
 
   <p class="hint">
     Testmodus: Alle 24 Türchen sind vorübergehend freigeschaltet.
     Bereits geöffnete Türchen zeigen ihr Bild.
   </p>
 
-  <div class="credit">
-    Limurgia · Ein Advent voller Geschichten
-  </div>
-
+  <div class="credit">Limurgia · Ein Advent voller Geschichten</div>
 </main>
-
-<!-- GESCHICHTEN-POPUP -->
 
 <dialog id="storyDialog" aria-labelledby="storyTitle">
   <div class="dialog-inner">
-
-    <button
-      class="close"
-      id="closeDialog"
-      aria-label="Schließen">×</button>
-
+    <button class="close" id="closeDialog" aria-label="Schließen">×</button>
     <img id="storyImage" alt="">
-
     <h2 id="storyTitle"></h2>
-
     <p id="storyText" class="story"></p>
-
   </div>
 </dialog>
 
 <script>
-
-/* ==============================
-   GESCHICHTEN UND BILDER
-============================== */
-
 const pngUppercase = [6, 8];
 
 const stories = Array.from({ length: 24 }, (_, i) => {
   const day = i + 1;
   const number = String(day).padStart(2, "0");
   const extension = pngUppercase.includes(day) ? "PNG" : "png";
-
   return {
     title: `Geschichte ${day}`,
     image: `images/tuerchen-${number}.${extension}`,
-    text: `Hier kommt deine Geschichte zum ${day}. Dezember.
-
-Dieser Text ist zunächst ein Platzhalter.`
+    text: `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.`
   };
 });
-
-/* ==============================
-   DATUMSFREIGABE
-============================== */
 
 // TESTMODUS: Alle Türchen sind freigeschaltet.
 const available = (day) => true;
 
 // VOR VERÖFFENTLICHUNG AKTIVIEREN:
-// Die Zeile oben auskommentieren
-// und die folgenden Zeilen aktivieren.
-
+// Die Zeile oben auskommentieren und die folgenden Zeilen aktivieren.
 // const today = new Date();
 // const available = (day) =>
 //   today.getMonth() === 11 &&
 //   today.getDate() >= day;
 
-/* ==============================
-   SPEICHERUNG
-============================== */
-
 const storageKey = "limurgia-advent-2026-opened";
-
 let opened = [];
 
 try {
-  const saved = JSON.parse(
-    localStorage.getItem(storageKey) || "[]"
-  );
-
+  const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
   if (Array.isArray(saved)) {
-    opened = saved.filter(
-      day => Number.isInteger(day) &&
-             day >= 1 &&
-             day <= 24
-    );
+    opened = saved.filter(day => Number.isInteger(day) && day >= 1 && day <= 24);
   }
 } catch (error) {
   opened = [];
@@ -460,133 +318,69 @@ try {
 const calendar = document.getElementById("calendar");
 const dialog = document.getElementById("storyDialog");
 
-/* ==============================
-   KALENDER AUFBAUEN
-============================== */
-
 function render() {
   calendar.replaceChildren();
-
   stories.forEach((story, index) => {
     const day = index + 1;
     const unlocked = available(day);
     const seen = opened.includes(day);
-
     const button = document.createElement("button");
-
     button.type = "button";
-
-    button.className =
-      "door" +
-      (!unlocked ? " locked" : "") +
-      (seen ? " open" : "");
-
+    button.className = "door" + (!unlocked ? " locked" : "") + (seen ? " open" : "");
     button.disabled = !unlocked;
-
-    button.setAttribute(
-      "aria-label",
-      `Türchen ${day}: ${
-        unlocked ? "Geschichte öffnen" : "noch verschlossen"
-      }`
-    );
+    button.setAttribute("aria-label", `Türchen ${day}: ${unlocked ? "Geschichte öffnen" : "noch verschlossen"}`);
 
     if (seen) {
       const image = document.createElement("img");
       image.src = story.image;
       image.alt = "";
       image.loading = "lazy";
-
       button.append(image);
-
       const corner = document.createElement("span");
       corner.className = "corner";
       corner.textContent = day;
-
       button.append(corner);
     } else {
       const number = document.createElement("span");
       number.className = "number";
       number.textContent = day;
-
       button.append(number);
-
       const label = document.createElement("span");
       label.className = "small";
-      label.textContent = unlocked
-        ? "Öffnen"
-        : "Verschlossen";
-
+      label.textContent = unlocked ? "Öffnen" : "Verschlossen";
       button.append(label);
     }
 
-    button.addEventListener("click", () => {
-      openStory(day);
-    });
-
+    button.addEventListener("click", () => openStory(day));
     calendar.append(button);
   });
 }
 
-/* ==============================
-   GESCHICHTE ÖFFNEN
-============================== */
-
 function openStory(day) {
   if (!available(day)) return;
-
   const story = stories[day - 1];
-
   if (!opened.includes(day)) {
     opened.push(day);
-
     try {
-      localStorage.setItem(
-        storageKey,
-        JSON.stringify(opened)
-      );
+      localStorage.setItem(storageKey, JSON.stringify(opened));
     } catch (error) {
       // Ohne Speicherung weiterarbeiten.
     }
   }
-
-  document.getElementById("storyImage").src =
-    story.image;
-
-  document.getElementById("storyImage").alt =
-    story.title;
-
-  document.getElementById("storyTitle").textContent =
-    story.title;
-
-  document.getElementById("storyText").textContent =
-    story.text;
-
+  document.getElementById("storyImage").src = story.image;
+  document.getElementById("storyImage").alt = story.title;
+  document.getElementById("storyTitle").textContent = story.title;
+  document.getElementById("storyText").textContent = story.text;
   render();
   dialog.showModal();
 }
 
-/* ==============================
-   POPUP SCHLIESSEN
-============================== */
-
-document.getElementById("closeDialog")
-  .addEventListener("click", () => {
-    dialog.close();
-  });
-
+document.getElementById("closeDialog").addEventListener("click", () => dialog.close());
 dialog.addEventListener("click", event => {
-  if (event.target === dialog) {
-    dialog.close();
-  }
+  if (event.target === dialog) dialog.close();
 });
 
-/* ==============================
-   START
-============================== */
-
 render();
-
 </script>
-
 </body>
 </html>
