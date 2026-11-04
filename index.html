@@ -132,9 +132,7 @@ main {
   cursor: not-allowed;
 }
 
-.door.open {
-  border: 0;
-}
+.door.open { border: 0; }
 
 .door.open img {
   display: block;
@@ -177,36 +175,13 @@ main {
 
 #storyDialog .dialog-inner { padding: 30px 36px 34px; }
 
-#storyDialog #storyImage {
-  display: block;
-  width: 100%;
-  height: min(55vh, 520px);
-  max-width: 100%;
-  max-height: none;
-  object-fit: contain;
-  margin: 0 auto 18px;
-}
-
 #storyDialog .dialog-inner h2 {
   margin: 0 0 22px;
   font: normal 34px Georgia, serif;
 }
 
-.close {
-  float: right;
-  border: 0;
-  background: none;
-  color: #222;
-  font-size: 30px;
-  cursor: pointer;
-}
-
-.story-content {
-  width: 100%;
-}
-
 .story-quote {
-  margin: 0 0 18px;
+  margin: 0 0 10px;
   padding: 22px 24px 18px;
   border-left: 3px solid var(--wine);
   background: #f8f2f1;
@@ -219,11 +194,21 @@ main {
 }
 
 .story-quote-author {
-  margin: -10px 0 20px;
+  margin: 0 0 24px;
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #666;
+}
+
+#storyDialog #storyImage {
+  display: block;
+  width: 100%;
+  height: min(55vh, 520px);
+  max-width: 100%;
+  max-height: none;
+  object-fit: contain;
+  margin: 0 auto 28px;
 }
 
 .story {
@@ -231,6 +216,15 @@ main {
   margin: 0;
   font-size: 16px;
   line-height: 1.8;
+}
+
+.close {
+  float: right;
+  border: 0;
+  background: none;
+  color: #222;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .hint {
@@ -262,8 +256,8 @@ main {
   .calendar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
   .door .number { font-size: 29px; }
   #storyDialog .dialog-inner { padding: 18px; }
-  #storyDialog #storyImage { height: min(55vh, 500px); }
   #storyDialog .dialog-inner h2 { font-size: 27px; }
+  #storyDialog #storyImage { height: min(45vh, 400px); }
   .story-quote { padding: 18px 18px 14px; }
 }
 
@@ -303,13 +297,11 @@ main {
 <dialog id="storyDialog" aria-labelledby="storyTitle">
   <div class="dialog-inner">
     <button class="close" id="closeDialog" aria-label="Schließen">×</button>
-    <img id="storyImage" alt="">
     <h2 id="storyTitle"></h2>
-    <div class="story-content">
-      <blockquote id="storyQuote" class="story-quote" hidden></blockquote>
-      <div id="storyQuoteAuthor" class="story-quote-author" hidden></div>
-      <p id="storyText" class="story"></p>
-    </div>
+    <blockquote id="storyQuote" class="story-quote" hidden></blockquote>
+    <div id="storyQuoteAuthor" class="story-quote-author" hidden></div>
+    <img id="storyImage" alt="">
+    <p id="storyText" class="story"></p>
   </div>
 </dialog>
 
@@ -417,11 +409,11 @@ function openStory(day) {
 
   const quoteEl = document.getElementById("storyQuote");
   const quoteAuthorEl = document.getElementById("storyQuoteAuthor");
-  const storyTextEl = document.getElementById("storyText");
 
+  document.getElementById("storyTitle").textContent = story.title;
   document.getElementById("storyImage").src = story.image;
   document.getElementById("storyImage").alt = story.title;
-  document.getElementById("storyTitle").textContent = story.title;
+  document.getElementById("storyText").textContent = story.text;
 
   if (story.quote) {
     quoteEl.textContent = story.quote;
@@ -435,7 +427,6 @@ function openStory(day) {
     quoteAuthorEl.hidden = true;
   }
 
-  storyTextEl.textContent = story.text;
   render();
   dialog.showModal();
 }
