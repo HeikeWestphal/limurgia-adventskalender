@@ -3,297 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Weihnachtskalender – Limurgia</title>
-
 <style>
 :root {
-  --ink: #161616;
-  --wine: #813e45;
-  --border: #c8c8c8;
-  --background: #ffffff;
+  --ink: #232323;
+  --accent: #0073aa;
+  --border: #d5d5d5;
+  --background: #fff;
 }
-
 * { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.top {
-  border-top: 3px solid #111;
-  padding: 12px 24px;
-}
-
-.top-inner {
-  max-width: 1052px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.header-logo {
-  display: block;
-  width: clamp(200px, 36vw, 440px);
-  max-width: 75%;
-  height: auto;
-}
-
-.back {
-  flex-shrink: 0;
-  font-size: 13px;
-  color: #444;
-  text-decoration: underline;
-}
-
-main {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px 60px;
-}
-
-.calendar-intro {
-  width: 100%;
-  margin: 18px 0 28px;
-  padding: 0;
-  text-align: center;
-}
-
-.calendar-poem {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(14px, 1.5vw, 17px);
-  font-style: italic;
-  line-height: 1.65;
-  text-align: justify;
-  text-align-last: center;
-  color: #333;
-}
-
-.calendar {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 10px;
-}
-
-.door {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 100%;
-  aspect-ratio: 1;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 0;
-  background: #fafafa;
-  color: var(--ink);
-  cursor: pointer;
-  overflow: hidden;
-  transition: transform .15s, border-color .15s;
-}
-
-.door:hover:not(:disabled):not(.open) {
-  transform: translateY(-3px);
-  border-color: var(--wine);
-}
-
-.door:focus-visible {
-  outline: 3px solid var(--wine);
-  outline-offset: 3px;
-}
-
-.door .number {
-  font: normal clamp(24px, 4vw, 42px) Georgia, serif;
-}
-
-.door .small {
-  position: absolute;
-  bottom: 8px;
-  font-size: 10px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.door.locked {
-  background: #f4f5f5;
-  color: #999;
-  cursor: not-allowed;
-}
-
+body { margin: 0; background: var(--background); color: var(--ink); font: 15px/1.6 Arial, Helvetica, sans-serif; }
+.top { border-top: 3px solid #111; padding: 12px 24px; }
+.top-inner { max-width: 1052px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.header-logo { display: block; width: clamp(200px, 36vw, 440px); max-width: 75%; height: auto; }
+.back { flex-shrink: 0; font-size: 13px; color: #444; text-decoration: underline; }
+main { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+.calendar-intro { width: 100%; margin: 18px 0 28px; text-align: center; }
+.calendar-poem { width: 100%; margin: 0; font: italic clamp(14px, 1.5vw, 17px)/1.65 Georgia, "Times New Roman", serif; text-align: justify; text-align-last: center; color: #333; }
+.calendar { display: grid; width: 100%; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.door { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 1; padding: 0; border: 1px solid var(--border); border-radius: 0; background: #fafafa; color: var(--ink); cursor: pointer; overflow: hidden; transition: transform .15s, border-color .15s; }
+.door:hover:not(:disabled):not(.open) { transform: translateY(-3px); border-color: var(--accent); }
+.door:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.door .number { font: normal clamp(24px, 4vw, 42px) Georgia, serif; }
+.door .small { position: absolute; bottom: 8px; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+.door.locked { background: #f4f5f5; color: #999; cursor: not-allowed; }
 .door.open { border: 0; }
-
-.door.open img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.door.open::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, .4);
-  pointer-events: none;
-}
-
-.door.open .corner {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  background: rgba(255,255,255,.95);
-  padding: 2px 9px;
-  font: 18px Georgia, serif;
-}
-
-#storyDialog {
-  width: min(960px, 94vw);
-  max-width: 94vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 0;
-  border: 0;
-  background: white;
-  color: var(--ink);
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.18);
-}
-
+.door.open img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.door.open::after { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.4); pointer-events: none; }
+.door.open .corner { position: absolute; z-index: 1; left: 0; top: 0; background: rgba(255,255,255,.95); padding: 2px 9px; font: 18px Georgia, serif; }
+#storyDialog { width: min(960px, 94vw); max-width: 94vw; max-height: 90vh; overflow-y: auto; padding: 0; border: 0; background: #fff; color: var(--ink); box-shadow: 0 18px 60px rgba(0,0,0,.18); }
 #storyDialog::backdrop { background: rgba(0,0,0,.62); }
-
 #storyDialog .dialog-inner { padding: 30px 36px 34px; }
-
-#storyDialog .dialog-inner h2 {
-  margin: 0 0 22px;
-  font: normal 34px Georgia, serif;
-}
-
-.story-quote {
-  margin: 0 0 10px;
-  padding: 22px 24px 18px;
-  border-left: 3px solid var(--wine);
-  background: #f8f2f1;
-  color: #2a2a2a;
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  font-size: clamp(18px, 2vw, 26px);
-  line-height: 1.7;
-  white-space: pre-line;
-}
-
-.story-quote-author {
-  margin: 0 0 24px;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #666;
-}
-
-#storyDialog #storyImage {
-  display: block;
-  width: 100%;
-  height: min(55vh, 520px);
-  max-width: 100%;
-  max-height: none;
-  object-fit: contain;
-  margin: 0 auto 28px;
-}
-
-.story {
-  white-space: pre-line;
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.8;
-}
-
-.close {
-  float: right;
-  border: 0;
-  background: none;
-  color: #222;
-  font-size: 30px;
-  cursor: pointer;
-}
-
-.hint {
-  margin-top: 22px;
-  font-size: 12px;
-  color: #666;
-}
-
-.credit {
-  margin-top: 45px;
-  padding-top: 18px;
-  border-top: 1px solid #ddd;
-  font: italic 16px Georgia, serif;
-}
-
-@media (max-width: 800px) {
-  .calendar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .header-logo { width: clamp(200px, 48vw, 360px); }
-}
-
+#storyDialog .dialog-inner h2 { margin: 0 0 22px; font: normal 34px Georgia, serif; }
+.story-quote { margin: 0 0 10px; padding: 22px 24px 18px; border-left: 3px solid var(--accent); background: #f3f6f8; color: #292929; font: italic clamp(18px, 2vw, 26px)/1.7 Georgia, "Times New Roman", serif; white-space: pre-line; }
+.story-quote-author { margin: 0 0 24px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #666; }
+#storyDialog #storyImage { display: block; width: 100%; height: min(55vh, 520px); max-width: 100%; max-height: none; object-fit: contain; margin: 0 auto 28px; }
+.story { white-space: pre-line; margin: 0; font-size: 16px; line-height: 1.8; }
+.close { float: right; border: 0; background: none; color: #222; font-size: 30px; cursor: pointer; }
+.hint { margin-top: 22px; font-size: 12px; color: #666; }
+.credit { margin-top: 45px; padding-top: 18px; border-top: 1px solid #ddd; font: italic 16px Georgia, serif; }
+@media (max-width: 800px) { .calendar { grid-template-columns: repeat(4, minmax(0, 1fr)); } .header-logo { width: clamp(200px, 48vw, 360px); } }
 @media (max-width: 480px) {
-  .top { padding: 10px 14px; }
-  .top-inner { gap: 12px; }
-  .header-logo { width: 65%; max-width: 260px; }
-  .back { font-size: 11px; text-align: right; }
-  main { padding: 0 14px 40px; }
-  .calendar-intro { margin: 14px 0 22px; }
-  .calendar-poem { font-size: 14px; line-height: 1.5; }
-  .calendar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
-  .door .number { font-size: 29px; }
-  #storyDialog .dialog-inner { padding: 18px; }
-  #storyDialog .dialog-inner h2 { font-size: 27px; }
-  #storyDialog #storyImage { height: min(45vh, 400px); }
-  .story-quote { padding: 18px 18px 14px; }
+  .top { padding: 10px 14px; } .top-inner { gap: 12px; } .header-logo { width: 65%; max-width: 260px; }
+  .back { font-size: 11px; text-align: right; } main { padding: 0 14px 40px; }
+  .calendar-intro { margin: 14px 0 22px; } .calendar-poem { font-size: 14px; line-height: 1.5; }
+  .calendar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .door .number { font-size: 29px; }
+  #storyDialog .dialog-inner { padding: 18px; } #storyDialog .dialog-inner h2 { font-size: 27px; }
+  #storyDialog #storyImage { height: min(45vh, 400px); } .story-quote { padding: 18px 18px 14px; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .door { transition: none; }
-}
+@media (prefers-reduced-motion: reduce) { .door { transition: none; } }
 </style>
 </head>
-
 <body>
-<header class="top">
-  <div class="top-inner">
-    <img src="./weihnachtskalender.png" alt="Weihnachtskalender" class="header-logo">
-    <a class="back" href="https://limurgia.wordpress.com/">Zurück zum Blog</a>
-  </div>
-</header>
-
+<header class="top"><div class="top-inner">
+  <img src="./weihnachtskalender.png" alt="Weihnachtskalender" class="header-logo">
+  <a class="back" href="https://limurgia.wordpress.com/">Zurück zum Blog</a>
+</div></header>
 <main>
-  <div class="calendar-intro">
-    <p class="calendar-poem">
-      Wenn die Nächte länger werden und der Wein die Lippen wärmt,
-      erwachen Geschichten zum Leben. Manche davon schreibt das Leben,
-      andere der Wein, doch die schönsten erzählt die Nacht.
-    </p>
-  </div>
-
+  <div class="calendar-intro"><p class="calendar-poem">
+    Wenn die Nächte länger werden und der Wein die Lippen wärmt,
+    erwachen Geschichten zum Leben. Manche davon schreibt das Leben,
+    andere der Wein, doch die schönsten erzählt die Nacht.
+  </p></div>
   <section id="calendar" class="calendar" aria-label="Weihnachtskalender mit 24 Türchen"></section>
-
-  <p class="hint">
-    Testmodus: Alle 24 Türchen sind vorübergehend freigeschaltet.
-    Bereits geöffnete Türchen zeigen ihr Bild.
-  </p>
-
+  <p class="hint">Testmodus: Alle 24 Türchen sind vorübergehend freigeschaltet. Bereits geöffnete Türchen zeigen ihr Bild.</p>
   <div class="credit">Limurgia · Ein Advent voller Geschichten</div>
 </main>
-
 <dialog id="storyDialog" aria-labelledby="storyTitle">
   <div class="dialog-inner">
     <button class="close" id="closeDialog" aria-label="Schließen">×</button>
@@ -304,138 +79,82 @@ main {
     <p id="storyText" class="story"></p>
   </div>
 </dialog>
-
 <script src="./stories.js"></script>
 <script>
 const stories = Array.isArray(window.limurgiaStories) && window.limurgiaStories.length
-  ? window.limurgiaStories.map((story) => {
+  ? window.limurgiaStories.map(story => {
       const day = Number(story.day);
       const number = String(day).padStart(2, '0');
       const extension = [6, 8].includes(day) ? 'PNG' : 'png';
-      return {
-        ...story,
-        day,
-        title: story.title || `Geschichte ${day}`,
-        image: story.image || `images/tuerchen-${number}.${extension}`,
-        text: story.text || `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.`
-      };
+      return { ...story, day, title: story.title || `Geschichte ${day}`, image: story.image || `images/tuerchen-${number}.${extension}`, text: story.text || `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.` };
     })
   : Array.from({ length: 24 }, (_, i) => {
-      const day = i + 1;
-      const number = String(day).padStart(2, '0');
-      const extension = [6, 8].includes(day) ? 'PNG' : 'png';
-      return {
-        day,
-        title: `Geschichte ${day}`,
-        image: `images/tuerchen-${number}.${extension}`,
-        text: `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.`
-      };
+      const day = i + 1, number = String(day).padStart(2, '0'), extension = [6, 8].includes(day) ? 'PNG' : 'png';
+      return { day, title: `Geschichte ${day}`, image: `images/tuerchen-${number}.${extension}`, text: `Hier kommt deine Geschichte zum ${day}. Dezember.\n\nDieser Text ist zunächst ein Platzhalter.` };
     });
 
 // TESTMODUS: Alle Türchen sind freigeschaltet.
-const available = (day) => true;
-
-// VOR VERÖFFENTLICHUNG AKTIVIEREN:
-// Die Zeile oben auskommentieren und die folgenden Zeilen aktivieren.
+const available = day => true;
+// VOR VERÖFFENTLICHUNG AKTIVIEREN: Testmodus auskommentieren und Folgendes aktivieren.
 // const today = new Date();
-// const available = (day) =>
-//   today.getMonth() === 11 &&
-//   today.getDate() >= day;
+// const available = day => today.getMonth() === 11 && today.getDate() >= day;
 
 const storageKey = "limurgia-advent-2026-opened";
 let opened = [];
-
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey) || "[]");
-  if (Array.isArray(saved)) {
-    opened = saved.filter(day => Number.isInteger(day) && day >= 1 && day <= 24);
-  }
-} catch (error) {
-  opened = [];
-}
+  if (Array.isArray(saved)) opened = saved.filter(day => Number.isInteger(day) && day >= 1 && day <= 24);
+} catch (error) { opened = []; }
 
 const calendar = document.getElementById("calendar");
 const dialog = document.getElementById("storyDialog");
-
 function render() {
   calendar.replaceChildren();
   stories.forEach((story, index) => {
-    const day = index + 1;
-    const unlocked = available(day);
-    const seen = opened.includes(day);
+    const day = index + 1, unlocked = available(day), seen = opened.includes(day);
     const button = document.createElement("button");
     button.type = "button";
     button.className = "door" + (!unlocked ? " locked" : "") + (seen ? " open" : "");
     button.disabled = !unlocked;
     button.setAttribute("aria-label", `Türchen ${day}: ${unlocked ? "Geschichte öffnen" : "noch verschlossen"}`);
-
     if (seen) {
       const image = document.createElement("img");
-      image.src = story.image;
-      image.alt = "";
-      image.loading = "lazy";
-      button.append(image);
-      const corner = document.createElement("span");
-      corner.className = "corner";
-      corner.textContent = day;
-      button.append(corner);
+      image.src = story.image; image.alt = ""; image.loading = "lazy"; button.append(image);
+      const corner = document.createElement("span"); corner.className = "corner"; corner.textContent = day; button.append(corner);
     } else {
-      const number = document.createElement("span");
-      number.className = "number";
-      number.textContent = day;
-      button.append(number);
-      const label = document.createElement("span");
-      label.className = "small";
-      label.textContent = unlocked ? "Öffnen" : "Verschlossen";
-      button.append(label);
+      const number = document.createElement("span"); number.className = "number"; number.textContent = day; button.append(number);
+      const label = document.createElement("span"); label.className = "small"; label.textContent = unlocked ? "Öffnen" : "Verschlossen"; button.append(label);
     }
-
     button.addEventListener("click", () => openStory(day));
     calendar.append(button);
   });
 }
-
 function openStory(day) {
   if (!available(day)) return;
   const story = stories[day - 1];
   if (!opened.includes(day)) {
     opened.push(day);
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(opened));
-    } catch (error) {
-      // Ohne Speicherung weiterarbeiten.
-    }
+    try { localStorage.setItem(storageKey, JSON.stringify(opened)); } catch (error) { /* Ohne Speicherung weiterarbeiten. */ }
   }
-
   const quoteEl = document.getElementById("storyQuote");
   const quoteAuthorEl = document.getElementById("storyQuoteAuthor");
-
   document.getElementById("storyTitle").textContent = story.title;
   document.getElementById("storyImage").src = story.image;
   document.getElementById("storyImage").alt = story.title;
   document.getElementById("storyText").textContent = story.text;
-
   if (story.quote) {
     quoteEl.textContent = story.quote;
     quoteAuthorEl.textContent = story.quoteAuthor || "William Shakespeare, Hamlet";
-    quoteEl.hidden = false;
-    quoteAuthorEl.hidden = false;
+    quoteEl.hidden = false; quoteAuthorEl.hidden = false;
   } else {
-    quoteEl.textContent = "";
-    quoteAuthorEl.textContent = "";
-    quoteEl.hidden = true;
-    quoteAuthorEl.hidden = true;
+    quoteEl.textContent = ""; quoteAuthorEl.textContent = "";
+    quoteEl.hidden = true; quoteAuthorEl.hidden = true;
   }
-
   render();
   dialog.showModal();
 }
-
 document.getElementById("closeDialog").addEventListener("click", () => dialog.close());
-dialog.addEventListener("click", event => {
-  if (event.target === dialog) dialog.close();
-});
-
+dialog.addEventListener("click", event => { if (event.target === dialog) dialog.close(); });
 render();
 </script>
 </body>
