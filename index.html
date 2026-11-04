@@ -36,21 +36,26 @@ main { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
 #storyDialog::backdrop { background: rgba(0,0,0,.58); }
 #storyDialog .dialog-inner { padding: 30px 36px 34px; }
 #storyDialog .dialog-inner h2 { margin: 0 0 22px; font: normal 34px Georgia, serif; }
-.story-quote { margin: 0 0 10px; padding: 22px 24px 18px; border-left: 3px solid var(--accent); background: #f4f4f4; color: #292929; font: italic clamp(18px, 2vw, 26px)/1.7 Georgia, "Times New Roman", serif; white-space: pre-line; }
-.story-quote-author { margin: 0 0 24px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #666; }
-#storyDialog #storyImage { display: block; width: 100%; height: min(55vh, 520px); max-width: 100%; max-height: none; object-fit: contain; margin: 0 auto 28px; }
-.story { white-space: pre-line; margin: 0; font-size: 16px; line-height: 1.8; }
+.story-layout { display: grid; grid-template-columns: minmax(220px, 1.1fr) minmax(0, 1.5fr); gap: 28px; align-items: start; }
+#storyImage { display: block; width: 100%; height: auto; max-height: 520px; object-fit: cover; margin: 0; }
+.story-copy { display: flex; flex-direction: column; }
+.story-quote { margin: 0 0 16px; padding-left: 14px; border-left: 3px solid var(--accent); background: transparent; color: #2d2d2d; font: italic 15px/1.8 Georgia, "Times New Roman", serif; white-space: pre-line; }
+.story-quote-author { margin: 0 0 18px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #666; }
+.story { white-space: pre-line; margin: 0; font-size: 15px; line-height: 1.8; }
 .close { float: right; border: 0; background: none; color: #222; font-size: 30px; cursor: pointer; }
 .hint { margin-top: 22px; font-size: 12px; color: #666; }
 .credit { margin-top: 45px; padding-top: 18px; border-top: 1px solid #ddd; font: italic 16px Georgia, serif; }
 @media (max-width: 800px) { .calendar { grid-template-columns: repeat(4, minmax(0, 1fr)); } .header-logo { width: clamp(200px, 48vw, 360px); } }
+@media (max-width: 680px) {
+  .story-layout { grid-template-columns: 1fr; }
+}
 @media (max-width: 480px) {
   .top { padding: 10px 14px; } .top-inner { gap: 12px; } .header-logo { width: 65%; max-width: 260px; }
   .back { font-size: 11px; text-align: right; } main { padding: 0 14px 40px; }
   .calendar-intro { margin: 14px 0 22px; } .calendar-poem { font-size: 14px; line-height: 1.5; }
   .calendar { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; } .door .number { font-size: 29px; }
   #storyDialog .dialog-inner { padding: 18px; } #storyDialog .dialog-inner h2 { font-size: 27px; }
-  #storyDialog #storyImage { height: min(45vh, 400px); } .story-quote { padding: 18px 18px 14px; }
+  #storyImage { max-height: 320px; }
 }
 @media (prefers-reduced-motion: reduce) { .door { transition: none; } }
 </style>
@@ -74,10 +79,14 @@ main { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
   <div class="dialog-inner">
     <button class="close" id="closeDialog" aria-label="Schließen">×</button>
     <h2 id="storyTitle"></h2>
-    <blockquote id="storyQuote" class="story-quote" hidden></blockquote>
-    <div id="storyQuoteAuthor" class="story-quote-author" hidden></div>
-    <img id="storyImage" alt="">
-    <p id="storyText" class="story"></p>
+    <div class="story-layout">
+      <img id="storyImage" alt="">
+      <div class="story-copy">
+        <blockquote id="storyQuote" class="story-quote" hidden></blockquote>
+        <div id="storyQuoteAuthor" class="story-quote-author" hidden></div>
+        <p id="storyText" class="story"></p>
+      </div>
+    </div>
   </div>
 </dialog>
 <script src="./stories.js"></script>
