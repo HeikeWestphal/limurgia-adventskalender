@@ -9,8 +9,9 @@ window.limurgiaStories = [
     title: "Die bessere Hamlet",
     quote: "„Ob’s edler im Gemüt, die Pfeil und Schleudern\nDes wütenden Geschicks zu erdulden oder,\nSich waffnend gegen eine See von Plagen,\nDurch Widerstand sie enden? Sterben – schlafen –\nNoch nichts weiter! Und zu wissen, dass ein Schlaf\nDas Herzweh und die tausend natürlichen\nStöße des irdischen Daseins aufhebt,\nUnd durch einen anderen Weg zu enden:\nAufwachen! Und wissen, dass ein Zug\nUns von dem Schlaf zur Behausung von\nUnendlichkeit, zum wahren Unendlichen,\nZu sehr merkwürdigen Geheimnissen führt.“,
     quoteAuthor: "William Shakespeare, Hamlet (3. Aufzug, 1. Szene)",
+    preview: "Eines meiner Lieblingszitate, das mir fast täglich durch den Kopf schwirrt.",
     storyFile: "story-02.html",
-    text: "Eines meiner Lieblingszitate, das mir fast täglich durch den Kopf schwirrt.\n\nAch, was wäre ich für ein guter Hamlet geworden! Doch zugetraut hat man mir immer nur die armselige Julia.\n\nVielleicht liegt darin schon ein entscheidender Unterschied: Ich habe nie versucht, auf allen Hochzeiten mitzutanzen, sondern mich dafür entschieden, die Dinge anders zu sehen. Die Rollen, die man uns in der Schule zuordnet, sind oft viel zu klein. Man bekommt eine bestimmte Geschichte, wird auf eine bestimmte Weise betrachtet und muss dann mit der Magie der eigenen Vorstellungskraft trotzdem weiterleben.\n\nDabei war ich nie besonders gut darin, mich an die Erwartungen zu halten. Ich bin eher der Typ, der in einer langweiligen Konversation plötzlich eine verrückte Idee hat und dann trotzdem noch irgendwie ernsthaft wirkt. Manchmal ist das der ganze Unterschied zwischen einem Leben und einer bloßen Rolle.\n\nDie Rolle in meinem Leben habe ich nicht wirklich gesucht. Ich habe sie eher mitgenommen, wie man einen alten Mantel aus dem Schrank zieht, der nicht richtig passt, aber trotzdem warm hält. Ich war nie der Held der Geschichte, sondern eher derjenige, der im Nebensatz den entscheidenden Satz sagt.\n\nUnd doch: Wenn ich mit mir selbst rede, dann glaube ich manchmal, dass genau diese Art von Unangepasstem die größte Freiheit ist. Denn wer sich nicht anpasst, kann auch nicht auf die gleiche Weise verloren gehen.\n\nDann wäre ich also ein guter Hamlet? Vielleicht. Aber wahrscheinlich nur deshalb, weil ich nie wirklich in die Rolle eines anderen Menschen gepasst habe.\n\nUnd genau das ist vielleicht auch der ganze Sinn von Hamlet: Nicht der Streit mit dem Schicksal, sondern die Frage, wie man inmitten all dieser Plagen noch einen eigenen Sinn bewahren kann."
+    text: "Eines meiner Lieblingszitate, das mir fast täglich durch den Kopf schwirrt.\n\nAch, was wäre ich für ein guter Hamlet geworden! Doch zugetraut hat man mir immer nur die armselige Julia.\n\nVielleicht liegt darin schon ein entscheidender Unterschied: Ich habe nie versucht, auf allen Hochzeiten mitzutanzen, sondern mich dafür entschieden, die Dinge anders zu sehen. Die Rollen, die man uns in der Schule zuordnet, sind oft viel zu klein. Man bekommt eine bestimmte Geschichte, wird auf eine bestimmte Weise betrachtet und muss dann mit der Magie der eigenen Vorstellungskraft trotzdem weiterleben.\n\nDabei war ich nie besonders gut darin, mich an die Erwartungen zu halten. Ich bin eher der Typ, der in einer langweiligen Konversation plötzlich eine verrückte Idee hat und dann trotzdem noch irgendwie ernsthaft wirkt. Manchmal ist das der ganze Unterschied zwischen einem Leben und einer bloßen Rolle.\n\nDie Rolle in meinem Leben habe ich nie wirklich gesucht. Ich habe sie eher mitgenommen, wie man einen alten Mantel aus dem Schrank zieht, der nicht richtig passt, aber trotzdem warm hält.\n\nUnd doch: Wenn ich mit mir selbst rede, dann glaube ich manchmal, dass genau diese Art von Unangepasstem die größte Freiheit ist. Denn wer sich nicht anpasst, kann auch nicht auf die gleiche Weise verloren gehen.\n\nDann wäre ich also ein guter Hamlet? Vielleicht. Aber wahrscheinlich nur deshalb, weil ich nie wirklich in die Rolle eines anderen Menschen gepasst habe.\n\nUnd genau das ist vielleicht auch der ganze Sinn von Hamlet: Nicht der Streit mit dem Schicksal, sondern die Frage, wie man inmitten all dieser Plagen noch einen eigenen Sinn bewahren kann."
   },
   {
     day: 3,
@@ -19,8 +20,10 @@ window.limurgiaStories = [
   },
   {
     day: 4,
-    title: "Geschichte 4",
-    text: "Hier kommt deine Geschichte zum 4. Dezember.\n\nDieser Text ist zunächst ein Platzhalter."
+    title: "Sag niemals nie",
+    preview: "Es gibt Menschen, die haben einen Plan. Für ihr ganzes Leben.",
+    storyFile: "story-04.html",
+    text: "Es gibt Menschen, die haben einen Plan. Für ihr ganzes Leben.\n\nIch hatte auch so einen Traum. Den durfte ich nur leider nicht verwirklichen. Aber das steht auf einem anderen Blatt Papier – oder wer weiß, wo.\n\nSeit diesem Bruch im Leben habe ich immer das getan, was die anderen nicht wollten, dass ich tue. Ich sollte etwas mit Technik machen, habe ein Wirtschaftsabi gemacht. Ich sollte eine Lehre machen, und ich habe stattdessen Dinge erlebt, die ich nie erwartet hätte."
   },
   {
     day: 5,
@@ -123,3 +126,4 @@ window.limurgiaStories = [
     text: "Hier kommt deine Geschichte zum 24. Dezember.\n\nDieser Text ist zunächst ein Platzhalter."
   }
 ];
+
