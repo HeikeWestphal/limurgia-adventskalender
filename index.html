@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>24 Geschichten im Advent – Limurgia</title>
+<style>
+:root{--ink:#161616;--muted:#e9eef1;--wine:#813e45}*{box-sizing:border-box}body{margin:0;background:white;color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.65}.top{border-top:4px solid #111;padding:20px max(20px,calc((100vw - 1100px)/2));display:flex;justify-content:space-between;align-items:center}.brand{font:italic bold 25px Georgia,serif;color:#111;text-decoration:none}.back{font-size:13px;color:#444}.nav{background:var(--muted);padding:13px max(20px,calc((100vw - 1100px)/2));font-size:12px;text-transform:uppercase;letter-spacing:.04em}main{max-width:1000px;margin:65px auto;padding:0 24px 80px}h1,h2{font-family:Georgia,'Times New Roman',serif;font-weight:normal}h1{font-size:clamp(34px,5vw,54px);margin:0 0 8px}.intro{max-width:650px;margin-bottom:35px;color:#444}.calendar{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}.door{position:relative;aspect-ratio:1;border:1px solid #b7b7b7;background:#fafafa;display:grid;place-items:center;cursor:pointer;padding:0;overflow:hidden;color:#181818;transition:transform .15s,border-color .15s}.door:hover:not(:disabled){transform:translateY(-3px);border-color:var(--wine)}.door .number{font:normal clamp(24px,4vw,42px) Georgia,serif}.door .small{position:absolute;bottom:8px;font-size:10px;letter-spacing:.1em;text-transform:uppercase}.door.locked{background:#f4f5f5;color:#a5a5a5;cursor:not-allowed}.door.open img{width:100%;height:100%;object-fit:cover}.door.open .corner{position:absolute;left:0;top:0;background:#fffE;padding:1px 8px;font:18px Georgia,serif}.hint{font-size:12px;color:#666;margin-top:22px}dialog{border:0;max-width:min(700px,92vw);width:100%;max-height:90vh;padding:0;box-shadow:0 15px 60px #0003}dialog::backdrop{background:#0009}.dialog-inner{padding:30px}.dialog-inner img{width:100%;max-height:320px;object-fit:cover}.dialog-inner h2{font-size:34px;margin:14px 0}.close{float:right;background:none;border:0;font-size:30px;cursor:pointer}.story{white-space:pre-line}.credit{margin-top:50px;border-top:1px solid #ddd;padding-top:18px;font:italic 16px Georgia,serif}@media(max-width:650px){.calendar{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}main{margin:35px auto}.top{padding:15px 20px}.nav{padding:12px 20px}.door .number{font-size:29px}.dialog-inner{padding:18px}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="https://limurgia.wordpress.com/">Limurgia</a><a class="back" href="https://limurgia.wordpress.com/">Zurück zum Blog</a></header>
+<nav class="nav">Kunst · Literatur · Geschichten</nav>
+<main><h1>24 Geschichten im Advent</h1><p class="intro">Ein kleiner Adventskalender voller Bilder, Erinnerungen und Geschichten. Jeden Tag öffnet sich ein neues Türchen.</p><section id="calendar" class="calendar" aria-label="Adventskalender mit 24 Türchen"></section><p class="hint">Jedes Türchen öffnet sich ab dem entsprechenden Dezembertag. Bereits besuchte Türchen zeigen ihr Bild. Der Fortschritt wird nur in diesem Browser gespeichert.</p><div class="credit">Limurgia · Ein Advent voller Geschichten</div></main>
+<dialog id="storyDialog" aria-labelledby="storyTitle"><div class="dialog-inner"><button class="close" id="closeDialog" aria-label="Schließen">×</button><img id="storyImage" alt=""><h2 id="storyTitle"></h2><p id="storyText" class="story"></p></div></dialog>
+<script>
+// HIER SPÄTER BILDER UND TEXTE ERSETZEN. Bilder können WordPress-Mediathek-URLs sein.
+const stories=Array.from({length:24},(_,i)=>({
+ title:`Adventsgeschichte ${i+1}`,
+ image:`https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=800&auto=format&fit=crop&q=80`,
+ text:`Dies ist ein Platzhalter für deine Geschichte oder Anekdote zum ${i+1}. Dezember.\n\nHier kannst du später deinen eigenen Text einfügen.`
+}));
+// Zum Testen außerhalb des Dezembers ?vorschau=1 an die URL anhängen.
+const preview=new URLSearchParams(location.search).get('vorschau')==='1';
+const today=new Date();
+const available=(day)=>preview||(today.getMonth()===11&&today.getDate()>=day);
+const key='limurgia-advent-2026-opened';
+let opened=[];try{opened=JSON.parse(localStorage.getItem(key)||'[]')}catch{}
+const calendar=document.getElementById('calendar'),dialog=document.getElementById('storyDialog');
+function render(){calendar.replaceChildren();stories.forEach((story,i)=>{const day=i+1,unlocked=available(day),seen=opened.includes(day);const btn=document.createElement('button');btn.className='door'+(!unlocked?' locked':'')+(seen?' open':'');btn.disabled=!unlocked;btn.setAttribute('aria-label',`Türchen ${day}${unlocked?' öffnen':' noch verschlossen'}`);if(seen){const img=document.createElement('img');img.src=story.image;img.alt='';btn.append(img);const corner=document.createElement('span');corner.className='corner';corner.textContent=day;btn.append(corner)}else{const num=document.createElement('span');num.className='number';num.textContent=day;btn.append(num);const small=document.createElement('span');small.className='small';small.textContent=unlocked?'Öffnen':'Verschlossen';btn.append(small)}btn.addEventListener('click',()=>openStory(day));calendar.append(btn)})}
+function openStory(day){if(!available(day))return;const story=stories[day-1];if(!opened.includes(day)){opened.push(day);try{localStorage.setItem(key,JSON.stringify(opened))}catch{}}document.getElementById('storyImage').src=story.image;document.getElementById('storyImage').alt=story.title;document.getElementById('storyTitle').textContent=story.title;document.getElementById('storyText').textContent=story.text;render();dialog.showModal()}
+document.getElementById('closeDialog').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});render();
+</script>
+</body></html>
