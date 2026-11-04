@@ -14,39 +14,36 @@
       das Herzweh und die tausend natürlichen<br>
       Stöße des irdischen Daseins aufhebt …“
     </blockquote>
-
     <p class="story-custom__author">William Shakespeare · Hamlet</p>
 
     <p>Eines meiner Lieblingszitate, das mir fast täglich durch den Kopf schwirrt.</p>
-
     <p>Ach, was wäre ich für ein guter Hamlet geworden! Doch zugetraut hat man mir immer nur die armselige Julia.</p>
-
     <p>Vielleicht liegt darin schon ein entscheidender Unterschied: Ich habe nie versucht, auf allen Hochzeiten mitzutanzen, sondern mich dafür entschieden, die Dinge anders zu sehen. Die Rollen, die man uns in der Schule zuordnet, sind oft viel zu klein. Man bekommt eine bestimmte Geschichte, wird auf eine bestimmte Weise betrachtet und muss dann mit der Magie der eigenen Vorstellungskraft trotzdem weiterleben.</p>
-
-    <p>Die Rolle in meinem Leben habe ich nie wirklich gesucht. Ich habe sie eher mitgenommen, wie man einen alten Mantel aus dem Schrank zieht, der nicht richtig passt, aber trotzdem warm hält. Ich war nie der Held der Geschichte, sondern eher derjenige, der im Nebensatz den entscheidenden Satz sagt.</p>
-
+    <p>Die Rolle in meinem Leben habe ich nie wirklich gesucht. Ich habe sie eher mitgenommen, wie man einen alten Mantel aus dem Schrank zieht, der nicht richtig passt, aber trotzdem warm hält.</p>
     <p>Und doch: Wenn ich mit mir selbst rede, dann glaube ich manchmal, dass genau diese Art von Unangepasstem die größte Freiheit ist. Denn wer sich nicht anpasst, kann auch nicht auf die gleiche Weise verloren gehen.</p>
-
     <p>Dann wäre ich also ein guter Hamlet? Vielleicht. Aber wahrscheinlich nur deshalb, weil ich nie wirklich in die Rolle eines anderen Menschen gepasst habe.</p>
-
     <p>Und genau das ist vielleicht auch der ganze Sinn von Hamlet: Nicht der Streit mit dem Schicksal, sondern die Frage, wie man inmitten all dieser Plagen noch einen eigenen Sinn bewahren kann.</p>
   </div>
 </article>
 
 <style>
-.story-custom {
+.story-custom--hamlet {
   display: grid;
   grid-template-columns: minmax(220px, 360px) minmax(0, 1fr);
-  gap: 2rem;
+  grid-template-rows: auto auto auto auto;
+  column-gap: 2rem;
+  row-gap: 0.75rem;
   align-items: start;
   padding: 0.5rem 0 1rem;
 }
 
-.story-custom__visual {
+.story-custom--hamlet .story-custom__visual {
+  grid-column: 1;
+  grid-row: 1 / 4;
   width: 100%;
 }
 
-.story-custom__visual img {
+.story-custom--hamlet .story-custom__visual img {
   display: block;
   width: 100%;
   max-height: 420px;
@@ -54,22 +51,28 @@
   box-shadow: 0 12px 30px rgba(0,0,0,0.12);
 }
 
-.story-custom__content {
+/* The quote and attribution sit beside the image; narrative paragraphs span the popup. */
+.story-custom--hamlet .story-custom__content {
+  display: contents;
+  color: #262626;
   font-size: 1rem;
   line-height: 1.8;
-  color: #262626;
 }
 
-.story-custom__eyebrow {
-  margin: 0 0 0.75rem;
+.story-custom--hamlet .story-custom__eyebrow {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0 0 0.25rem;
   font-size: 0.72rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #7a7a7a;
 }
 
-.story-custom blockquote {
-  margin: 0 0 1rem;
+.story-custom--hamlet blockquote {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
   padding: 1rem 1.2rem 1rem 1.4rem;
   border-left: 3px solid #111;
   font-family: Georgia, "Times New Roman", serif;
@@ -79,8 +82,11 @@
   color: #2d2d2d;
 }
 
-.story-custom__author {
-  margin: 0 0 1.2rem;
+.story-custom--hamlet .story-custom__author {
+  grid-column: 2;
+  grid-row: 3;
+  justify-self: end;
+  margin: 0;
   text-align: right;
   font-size: 0.72rem;
   letter-spacing: 0.12em;
@@ -88,15 +94,24 @@
   color: #6d6d6d;
 }
 
-.story-custom p {
+.story-custom--hamlet .story-custom__content > p:nth-of-type(n+2) {
+  grid-column: 1 / -1;
   margin: 0 0 1rem;
 }
 
 @media (max-width: 680px) {
-  .story-custom {
+  .story-custom--hamlet {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
     gap: 1rem;
+  }
+  .story-custom--hamlet .story-custom__visual,
+  .story-custom--hamlet .story-custom__eyebrow,
+  .story-custom--hamlet blockquote,
+  .story-custom--hamlet .story-custom__author,
+  .story-custom--hamlet .story-custom__content > p:nth-of-type(n+2) {
+    grid-column: 1;
+    grid-row: auto;
   }
 }
 </style>
-</article>
