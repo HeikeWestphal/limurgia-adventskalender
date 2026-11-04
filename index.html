@@ -187,6 +187,38 @@ dialog::backdrop {
   .door .number { font-size: 29px; }
   .dialog-inner { padding: 18px; }
 }
+.calendar-intro {
+  text-align: center;
+  margin: 15px auto 45px;
+}
+
+.calendar-intro h1 {
+  margin: 0;
+}
+
+.calendar-logo {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  margin: 0 auto 20px;
+}
+
+.calendar-poem {
+  max-width: 650px;
+  margin: 0 auto;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.8;
+  color: #333;
+}
+
+@media (max-width: 650px) {
+  .calendar-poem {
+    font-size: 16px;
+  }
+}  
 </style>
 </head>
 
@@ -202,13 +234,21 @@ dialog::backdrop {
 </header>
 
 <main>
-  <h1>24 Geschichten im Advent</h1>
+<div class="calendar-intro">
+  <h1>
+    <img
+      src="weihnachtskalender.png"
+      alt="Weihnachtskalender"
+      class="calendar-logo">
+  </h1>
 
-  <p class="intro">
-    Ein kleiner Adventskalender voller Bilder,
-    Erinnerungen und Geschichten.
-    Jeden Tag öffnet sich ein neues Türchen.
+  <p class="calendar-poem">
+    Wenn die Nächte länger werden und der Wein
+    die Lippen wärmt, erwachen Geschichten zum Leben.
+    Manche davon schreibt das Leben, andere der Wein,
+    doch die schönsten erzählt die Nacht.
   </p>
+</div>
 
   <section
     id="calendar"
