@@ -1,93 +1,133 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>24 Geschichten im Advent – Limurgia</title>
+
+<title>Weihnachtskalender – Limurgia</title>
 
 <style>
 :root {
   --ink: #161616;
-  --muted: #e9eef1;
   --wine: #813e45;
+  --border: #c8c8c8;
+  --background: #ffffff;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  background: white;
+  background: var(--background);
   color: var(--ink);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.6;
 }
+
+/* ==============================
+   KOPFBEREICH
+============================== */
 
 .top {
-  border-top: 4px solid #111;
-  padding: 20px max(20px, calc((100vw - 1100px)/2));
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-top: 3px solid #111;
+  padding: 12px 24px;
 }
 
-.brand {
-  font: italic bold 25px Georgia, serif;
-  color: #111;
-  text-decoration: none;
+.top-inner {
+  max-width: 1052px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header-logo {
+  display: block;
+  width: clamp(200px, 36vw, 440px);
+  max-width: 75%;
+  height: auto;
 }
 
 .back {
+  flex-shrink: 0;
   font-size: 13px;
   color: #444;
+  text-decoration: underline;
 }
+
+/* ==============================
+   HAUPTBEREICH
+============================== */
 
 main {
-  max-width: 1000px;
-  margin: 28px auto;
-  padding: 0 24px 80px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
 }
 
-h1, h2 {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-weight: normal;
+/* Einleitung und Kalender haben
+   immer dieselbe Containerbreite */
+
+.calendar-intro {
+  width: 100%;
+  margin: 18px 0 28px;
+  padding: 0;
+  text-align: center;
 }
 
-h1 {
-  font-size: clamp(34px, 5vw, 54px);
-  margin: 0 0 8px;
+.calendar-poem {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(14px, 1.5vw, 17px);
+  font-style: italic;
+  line-height: 1.65;
+  color: #333;
 }
 
-.intro {
-  max-width: 650px;
-  margin-bottom: 35px;
-  color: #444;
-}
+/* ==============================
+   KALENDER
+============================== */
 
 .calendar {
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 12px;
+  gap: 10px;
 }
 
 .door {
   position: relative;
-  aspect-ratio: 1;
-  border: 1px solid #b7b7b7;
-  background: #fafafa;
   display: grid;
   place-items: center;
-  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1;
   padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: #fafafa;
+  color: var(--ink);
+  cursor: pointer;
   overflow: hidden;
-  color: #181818;
   transition: transform .15s, border-color .15s;
 }
 
 .door:hover:not(:disabled) {
   transform: translateY(-3px);
   border-color: var(--wine);
+}
+
+.door:focus-visible {
+  outline: 3px solid var(--wine);
+  outline-offset: 3px;
 }
 
 .door .number {
@@ -104,11 +144,12 @@ h1 {
 
 .door.locked {
   background: #f4f5f5;
-  color: #a5a5a5;
+  color: #999;
   cursor: not-allowed;
 }
 
 .door.open img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -118,28 +159,27 @@ h1 {
   position: absolute;
   left: 0;
   top: 0;
-  background: #fffe;
-  padding: 1px 8px;
+  background: rgba(255,255,255,.95);
+  padding: 2px 9px;
   font: 18px Georgia, serif;
 }
 
-.hint {
-  font-size: 12px;
-  color: #666;
-  margin-top: 22px;
-}
+/* ==============================
+   GESCHICHTEN-POPUP
+============================== */
 
 dialog {
-  border: 0;
-  max-width: min(700px, 92vw);
-  width: 100%;
+  width: min(700px, 92vw);
   max-height: 90vh;
   padding: 0;
+  border: 0;
+  background: white;
+  color: var(--ink);
   box-shadow: 0 15px 60px #0003;
 }
 
 dialog::backdrop {
-  background: #0009;
+  background: rgba(0,0,0,.65);
 }
 
 .dialog-inner {
@@ -147,20 +187,22 @@ dialog::backdrop {
 }
 
 .dialog-inner img {
+  display: block;
   width: 100%;
   max-height: 320px;
   object-fit: cover;
 }
 
 .dialog-inner h2 {
-  font-size: 34px;
-  margin: 14px 0;
+  margin: 18px 0;
+  font: normal 34px Georgia, serif;
 }
 
 .close {
   float: right;
-  background: none;
   border: 0;
+  background: none;
+  color: #222;
   font-size: 30px;
   cursor: pointer;
 }
@@ -169,133 +211,47 @@ dialog::backdrop {
   white-space: pre-line;
 }
 
+/* ==============================
+   FUSSZEILE
+============================== */
+
+.hint {
+  margin-top: 22px;
+  font-size: 12px;
+  color: #666;
+}
+
 .credit {
-  margin-top: 50px;
-  border-top: 1px solid #ddd;
+  margin-top: 45px;
   padding-top: 18px;
+  border-top: 1px solid #ddd;
   font: italic 16px Georgia, serif;
 }
 
-@media(max-width:650px) {
-  .calendar {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  main { margin: 22px auto; }
-  .top { padding: 15px 20px; }
-  .door .number { font-size: 29px; }
-  .dialog-inner { padding: 18px; }
-}
-.calendar-intro {
-  width: 100%;
-  max-width: none;
-  margin: 16px 0 26px;
-  text-align: center;
-}
-
-.calendar-intro h1 {
-  margin: 0;
-}
-
-.calendar-logo {
-  display: block;
-  width: 100%;
-  max-width: 760px;
-  height: auto;
-  margin: 0 auto 20px;
-}
-
-.calendar-poem {
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(14px, 1.5vw, 17px);
-  font-style: italic;
-  line-height: 1.6;
-  color: #333;
-}
-
-@media (max-width: 650px) {
-  .calendar-poem {
-    font-size: 16px;
-  }
-}  
-
-/* Kompakter, responsiver Kopfbereich */
-
-.top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 12px max(24px, calc((100vw - 1100px) / 2));
-  border-top: 3px solid #111;
-}
-
-.header-logo {
-  display: block;
-  width: clamp(220px, 36vw, 440px);
-  max-width: 75%;
-  height: auto;
-  object-fit: contain;
-}
-
-.back {
-  flex-shrink: 0;
-  font-size: 13px;
-  color: #444;
-  text-decoration: underline;
-}
-
-/* Kalender näher an den Kopfbereich */
-
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px 60px;
-}
-
-.calendar-intro {
-  text-align: center;
-  margin: 16px auto 26px;
-}
-
-.calendar-poem {
-  max-width: 780px;
-  margin: 0 auto;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 16px;
-  font-style: italic;
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Flexible Türchen */
-
-.calendar {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 10px;
-}
-
-/* Tablets */
+/* ==============================
+   TABLET
+============================== */
 
 @media (max-width: 800px) {
+  .calendar {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .header-logo {
     width: clamp(200px, 48vw, 360px);
   }
-
-  .calendar {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }
 
-/* Smartphones */
+/* ==============================
+   SMARTPHONE
+============================== */
 
 @media (max-width: 480px) {
   .top {
     padding: 10px 14px;
+  }
+
+  .top-inner {
     gap: 12px;
   }
 
@@ -314,7 +270,7 @@ main {
   }
 
   .calendar-intro {
-    margin: 14px auto 22px;
+    margin: 14px 0 22px;
   }
 
   .calendar-poem {
@@ -326,207 +282,285 @@ main {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
   }
+
+  .door .number {
+    font-size: 29px;
+  }
+
+  .dialog-inner {
+    padding: 18px;
+  }
+
+  .dialog-inner h2 {
+    font-size: 27px;
+  }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .door {
+    transition: none;
+  }
+}
 </style>
 </head>
 
 <body>
-<header class="top">
-  <img
-    src="./weihnachtskalender.png"
-    alt="Weihnachtskalender"
-    class="header-logo">
 
-  <a class="back" href="https://limurgia.wordpress.com/">
-    Zurück zum Blog
-  </a>
+<!-- KOPFBEREICH -->
+
+<header class="top">
+  <div class="top-inner">
+    <img
+      src="./weihnachtskalender.png"
+      alt="Weihnachtskalender"
+      class="header-logo">
+
+    <a class="back"
+       href="https://limurgia.wordpress.com/">
+      Zurück zum Blog
+    </a>
+  </div>
 </header>
 
+<!-- HAUPTBEREICH -->
+
 <main>
+
   <div class="calendar-intro">
-  <p class="calendar-poem">
-    Wenn die Nächte länger werden und der Wein die Lippen wärmt,
-    erwachen Geschichten zum Leben. Manche davon schreibt das Leben,
-    andere der Wein, doch die schönsten erzählt die Nacht.
-  </p>
-</div>
+    <p class="calendar-poem">
+      Wenn die Nächte länger werden und der Wein die Lippen wärmt,
+      erwachen Geschichten zum Leben. Manche davon schreibt das Leben,
+      andere der Wein, doch die schönsten erzählt die Nacht.
+    </p>
+  </div>
 
   <section
     id="calendar"
     class="calendar"
-    aria-label="Adventskalender mit 24 Türchen">
+    aria-label="Weihnachtskalender mit 24 Türchen">
   </section>
 
   <p class="hint">
-    Testmodus: Alle 24 Türchen sind vorübergehend
-    geöffnet. Bereits besuchte Türchen zeigen ihr Bild.
-    Der Fortschritt wird nur in diesem Browser gespeichert.
+    Testmodus: Alle 24 Türchen sind vorübergehend freigeschaltet.
+    Bereits geöffnete Türchen zeigen ihr Bild.
   </p>
 
   <div class="credit">
     Limurgia · Ein Advent voller Geschichten
   </div>
+
 </main>
+
+<!-- GESCHICHTEN-POPUP -->
 
 <dialog id="storyDialog" aria-labelledby="storyTitle">
   <div class="dialog-inner">
+
     <button
       class="close"
       id="closeDialog"
       aria-label="Schließen">×</button>
 
     <img id="storyImage" alt="">
+
     <h2 id="storyTitle"></h2>
+
     <p id="storyText" class="story"></p>
+
   </div>
 </dialog>
 
 <script>
 
-// ========================================
-// GESCHICHTEN UND BILDER
-// ========================================
-// Hier später eigene Bilder und Texte einsetzen.
-// Bilder können URLs aus der WordPress-Mediathek sein.
+/* ==============================
+   GESCHICHTEN UND BILDER
+============================== */
 
-const stories = Array.from({length:24}, (_,i) => ({
-  title: `Adventsgeschichte ${i+1}`,
+// Hier später eigene Bilder und Texte eintragen.
 
-  image: `https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=800&auto=format&fit=crop&q=80`,
+const stories = Array.from({ length: 24 }, (_, i) => ({
+  title: `Adventsgeschichte ${i + 1}`,
 
-  text: `Dies ist ein Platzhalter für deine Geschichte oder Anekdote zum ${i+1}. Dezember.
+  image:
+    "https://images.unsplash.com/photo-1512389142860-9c449e58a543?w=800&auto=format&fit=crop&q=80",
+
+  text:
+    `Dies ist ein Platzhalter für deine Geschichte
+oder Anekdote zum ${i + 1}. Dezember.
 
 Hier kannst du später deinen eigenen Text einfügen.`
 }));
 
+/* ==============================
+   DATUMSFREIGABE
+============================== */
 
-// ========================================
-// DATUMSFREIGABE – TESTMODUS
-// ========================================
-
-// TEMPORÄR: Alle Türchen freigeschaltet.
+// TESTMODUS: Alle Türchen sind freigeschaltet.
 const available = (day) => true;
 
-// VOR DEM 1. DEZEMBER:
+// VOR VERÖFFENTLICHUNG AKTIVIEREN:
 // Die Zeile oben auskommentieren
-// und die folgenden Zeilen aktivieren:
+// und die folgenden Zeilen aktivieren.
 
 // const today = new Date();
 // const available = (day) =>
-//   today.getMonth() === 11 && today.getDate() >= day;
+//   today.getMonth() === 11 &&
+//   today.getDate() >= day;
 
+/* ==============================
+   SPEICHERUNG
+============================== */
 
-// ========================================
-// GEÖFFNETE TÜRCHEN SPEICHERN
-// ========================================
-
-const key = 'limurgia-advent-2026-opened';
+const storageKey = "limurgia-advent-2026-opened";
 
 let opened = [];
 
 try {
-  opened = JSON.parse(localStorage.getItem(key) || '[]');
-} catch {}
+  const saved = JSON.parse(
+    localStorage.getItem(storageKey) || "[]"
+  );
 
-const calendar = document.getElementById('calendar');
-const dialog = document.getElementById('storyDialog');
+  if (Array.isArray(saved)) {
+    opened = saved.filter(
+      day => Number.isInteger(day) &&
+             day >= 1 &&
+             day <= 24
+    );
+  }
+} catch (error) {
+  opened = [];
+}
 
+const calendar = document.getElementById("calendar");
+const dialog = document.getElementById("storyDialog");
 
-// ========================================
-// KALENDER DARSTELLEN
-// ========================================
+/* ==============================
+   KALENDER AUFBAUEN
+============================== */
 
 function render() {
   calendar.replaceChildren();
 
-  stories.forEach((story, i) => {
-    const day = i + 1;
+  stories.forEach((story, index) => {
+    const day = index + 1;
     const unlocked = available(day);
     const seen = opened.includes(day);
 
-    const btn = document.createElement('button');
+    const button = document.createElement("button");
 
-    btn.className =
-      'door' +
-      (!unlocked ? ' locked' : '') +
-      (seen ? ' open' : '');
+    button.type = "button";
 
-    btn.disabled = !unlocked;
+    button.className =
+      "door" +
+      (!unlocked ? " locked" : "") +
+      (seen ? " open" : "");
 
-    btn.setAttribute(
-      'aria-label',
-      `Türchen ${day}${unlocked ? ' öffnen' : ' noch verschlossen'}`
+    button.disabled = !unlocked;
+
+    button.setAttribute(
+      "aria-label",
+      `Türchen ${day}: ${
+        unlocked ? "Geschichte öffnen" : "noch verschlossen"
+      }`
     );
 
     if (seen) {
-      const img = document.createElement('img');
-      img.src = story.image;
-      img.alt = '';
-      btn.append(img);
+      const image = document.createElement("img");
+      image.src = story.image;
+      image.alt = "";
+      image.loading = "lazy";
 
-      const corner = document.createElement('span');
-      corner.className = 'corner';
+      button.append(image);
+
+      const corner = document.createElement("span");
+      corner.className = "corner";
       corner.textContent = day;
-      btn.append(corner);
-    } else {
-      const num = document.createElement('span');
-      num.className = 'number';
-      num.textContent = day;
-      btn.append(num);
 
-      const small = document.createElement('span');
-      small.className = 'small';
-      small.textContent = unlocked ? 'Öffnen' : 'Verschlossen';
-      btn.append(small);
+      button.append(corner);
+    } else {
+      const number = document.createElement("span");
+      number.className = "number";
+      number.textContent = day;
+
+      button.append(number);
+
+      const label = document.createElement("span");
+      label.className = "small";
+      label.textContent = unlocked
+        ? "Öffnen"
+        : "Verschlossen";
+
+      button.append(label);
     }
 
-    btn.addEventListener('click', () => openStory(day));
-    calendar.append(btn);
+    button.addEventListener("click", () => {
+      openStory(day);
+    });
+
+    calendar.append(button);
   });
 }
 
-
-// ========================================
-// GESCHICHTE ÖFFNEN
-// ========================================
+/* ==============================
+   GESCHICHTE ÖFFNEN
+============================== */
 
 function openStory(day) {
   if (!available(day)) return;
 
-  const story = stories[day-1];
+  const story = stories[day - 1];
 
   if (!opened.includes(day)) {
     opened.push(day);
 
     try {
-      localStorage.setItem(key, JSON.stringify(opened));
-    } catch {}
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify(opened)
+      );
+    } catch (error) {
+      // Ohne Speicherung weiterarbeiten.
+    }
   }
 
-  document.getElementById('storyImage').src = story.image;
-  document.getElementById('storyImage').alt = story.title;
-  document.getElementById('storyTitle').textContent = story.title;
-  document.getElementById('storyText').textContent = story.text;
+  document.getElementById("storyImage").src =
+    story.image;
+
+  document.getElementById("storyImage").alt =
+    story.title;
+
+  document.getElementById("storyTitle").textContent =
+    story.title;
+
+  document.getElementById("storyText").textContent =
+    story.text;
 
   render();
   dialog.showModal();
 }
 
+/* ==============================
+   POPUP SCHLIESSEN
+============================== */
 
-// ========================================
-// FENSTER SCHLIESSEN
-// ========================================
+document.getElementById("closeDialog")
+  .addEventListener("click", () => {
+    dialog.close();
+  });
 
-document.getElementById('closeDialog')
-  .addEventListener('click', () => dialog.close());
-
-dialog.addEventListener('click', e => {
-  if (e.target === dialog) dialog.close();
+dialog.addEventListener("click", event => {
+  if (event.target === dialog) {
+    dialog.close();
+  }
 });
+
+/* ==============================
+   START
+============================== */
 
 render();
 
 </script>
+
 </body>
 </html>
